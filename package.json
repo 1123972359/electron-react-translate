@@ -1,7 +1,10 @@
 {
   "name": "electron-react-translate",
+  "author": "lbb",
+  "description": "yuan shen, qi dong!",
   "version": "0.1.0",
   "private": true,
+  "main": "./elecrton/main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -10,17 +13,25 @@
     "@types/node": "^16.18.40",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "axios": "^1.4.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.1.0",
+    "md5": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "react-start": "cross-env E_ENV=dev craco start",
+    "start": "cross-env E_ENV=dev electron-forge start",
+    "build": "cross-env E_ENV=prod craco build",
+    "test": "craco test",
+    "package": "electron-forge package",
+    "dev": "electron .",
+    "make": "cross-env E_ENV=prod electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +50,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@electron-forge/cli": "^6.3.0",
+    "@electron-forge/maker-deb": "^6.3.0",
+    "@electron-forge/maker-rpm": "^6.3.0",
+    "@electron-forge/maker-squirrel": "^6.3.0",
+    "@electron-forge/maker-zip": "^6.3.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "electron": "^26.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.2"
+  },
+  "homepage": "."
 }
