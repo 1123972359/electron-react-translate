@@ -10,7 +10,8 @@ type TData = {
 
 const event = {
   init: 'on-translate-init',
-  translate: 'on-translate'
+  translate: 'on-translate',
+  hide: 'on-hide'
 };
 
 /**
@@ -18,12 +19,19 @@ const event = {
  */
 export const Result: FC = () => {
   const [data, setData] = useState<TData>();
+
   useEffect(() => {
     ipcRenderer.once(event.translate, (_: unknown, data: TData) => {
       console.log('Received event:', data);
       setData(data);
     });
     ipcRenderer.send(event.init);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        ipcRenderer.send(event.hide);
+      }
+    });
 
     return () => {
       ipcRenderer.removeAllListeners(event.translate);

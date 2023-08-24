@@ -5,6 +5,7 @@ const md5 = require('md5');
 const { createBrowserWindow } = require('./browser');
 const path = require('path');
 const store = require('./store');
+const { BASE_URL } = require('../constant');
 
 /**
  * 读取粘贴板事件
@@ -34,7 +35,7 @@ const createTranslate = (to = 'en') => {
     .then((response) => {
       console.log('Response:', response.data);
 
-      fs.writeFile('k.txt', JSON.stringify(response.data), (err) => {
+      fs.writeFile('log.txt', JSON.stringify(response.data), (err) => {
         console.error(err);
       });
 
@@ -56,8 +57,8 @@ const createSmallWindow = (data) => {
   // 监听渲染进程的请求
   let win = createBrowserWindow({
     loadURL: {
-      prod: path.resolve(app.getAppPath(), `./build/index.html?${search.toString()}`),
-      test: `http://localhost:3001/?${search.toString()}`
+      prod: `${BASE_URL.prod}?${search.toString()}`,
+      test: `${BASE_URL.test}?${search.toString()}`
     },
     width: 800,
     height: 500,
@@ -65,12 +66,18 @@ const createSmallWindow = (data) => {
     frame: true // 隐藏窗口边框和标题栏
   });
 
+  win.focus();
+
   const event = {
     init: 'on-translate-init',
-    translate: 'on-translate'
+    translate: 'on-translate',
+    hide: 'on-hide'
   };
   ipcMain.once(event.init, () => {
     win.webContents.send(event.translate, data);
+  });
+  ipcMain.once(event.hide, () => {
+    win.close();
   });
 
   // 监听小窗口关闭事件

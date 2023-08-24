@@ -1,4 +1,4 @@
-# Electron 百度翻译
+# Electron React 百度翻译
 
 这是一款基于`Electron`+`react`开发的翻译软件，目的是快速翻译文本。
 
@@ -46,13 +46,8 @@ npm i
 - `.env.test`
 
 ```js
-// 全局搜索这段代码, `test`根据自己的本地变更
-  const win = createBrowserWindow({
-    loadURL: {
-      prod: path.resolve(app.getAppPath(), './build/index.html'),
-      test: 'http://localhost:3001/'
-    }
-  });
+// 这个路径可进行配置
+elecrton\constant.js
 ```
 
 ## 快捷键

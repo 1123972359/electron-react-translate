@@ -30,7 +30,7 @@
     "build": "cross-env E_ENV=prod craco build",
     "test": "craco test",
     "package": "electron-forge package",
-    "dev": "electron .",
+    "dev": "cross-env E_ENV=dev electron .",
     "make": "cross-env E_ENV=prod electron-forge make"
   },
   "eslintConfig": {
